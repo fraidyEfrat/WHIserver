@@ -18,9 +18,10 @@ class ArticleController {
     }
 
     addNewArticle = async (req, res) => {
+        console.log("addNewArticle");
         const { idsubject, title, content, picture, author, grade } = req.body
 
-        //console.log(req.body)
+        console.log("✔🐱‍🚀✔✔✔")
 
         if (!idsubject) {
             return res.status(400).json({
