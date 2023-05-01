@@ -22,8 +22,7 @@ const upload = async (req, res) =>{
 
     }
 
-    res.send("test")
-
+    
 }
 
 module.exports = {upload}
