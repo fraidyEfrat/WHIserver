@@ -21,7 +21,7 @@ class ArticleController {
         console.log("addNewArticle");
         const { idsubject, title, content, picture, author, grade } = req.body
 
-        console.log("✔🐱‍🚀✔✔✔")
+        console.log("✔✔✔✔")
 
         if (!idsubject) {
             return res.status(400).json({

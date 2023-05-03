@@ -2,15 +2,16 @@ const express = require("express");
 const CourseRouter=express.Router();
 
 const courseController=require("../controllers/courseController");
-const verifyJWT = require("../middleware/verifyJWT")
+const verifyJWT_admin=require("../middleware/verifyJWT_admin");
+const verifyJWT = require("../middleware/verifyJWT");
 
 CourseRouter.route("/")
     .get(courseController.getAllCourses)
-    .post(verifyJWT,courseController.addNewCourse)
-    .put(courseController.updateCourseById);
+    .post([verifyJWT,verifyJWT_admin],courseController.addNewCourse)
+    .put([verifyJWT,verifyJWT_admin],courseController.updateCourseById);
 
 CourseRouter.route("/:idcourse")
-    .delete(courseController.deleteCourseById);
+    .delete([verifyJWT,verifyJWT_admin],courseController.deleteCourseById);
 
 
 module.exports=CourseRouter;

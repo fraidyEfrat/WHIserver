@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
 
+const handleErrors = require('./middleware/handleErrors')
+const notFound404 = require('./middleware/notFound404')
+
 const PORT = process.env.PORT || 3600
 
 //middleware    כל הקריאות תוך כדי יכולות להשתמש בזה לכן נקרא כך
@@ -34,14 +37,17 @@ app.use('/', require('./routes/root'))
 app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`))
 
 
-app.all('*', (req, res) => {
-    res.status(404)
-    // if (req.accepts('html')) {
-    //     // res.sendFile(path.join(__dirname, 'views', '404.html'))
-    // } else 
-    if (req.accepts('json')) {
-        res.json({ message: '404 Not Found' })
-    } else {
-        res.type('txt').send('404 Not Found')
-    }
-})
+// app.all('*', (req, res) => {
+//     res.status(404)
+//     // if (req.accepts('html')) {
+//     //     // res.sendFile(path.join(__dirname, 'views', '404.html'))
+//     // } else 
+//     if (req.accepts('json')) {
+//         res.json({ message: '404 Not Found' })
+//     } else {
+//         res.type('txt').send('404 Not Found')
+//     }
+// })
+
+app.all('*',notFound404);
+//app.use(handleErrors);
