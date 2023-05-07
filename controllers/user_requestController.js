@@ -9,7 +9,6 @@ const sendEmail=require('../email')
 class User_RequestController{
 
 getAllUser_Requests = async (req, res) => {
-    console.log("yudtgvdfui")
     const user_requests = await User_RequestDal.getAllUser_RequestsDal();
     console.log(user_requests)
     // If no notes
@@ -38,14 +37,17 @@ getUser_RequestsById = async (req, res) => {
 }
 
 addNewUser_Request = async (req, res) => {
-    const { iduser_request,subject, request, response, date, status, iduser } = req.body
-    console.log("in addNewUser_Request controller💕💕")
-    console.log("iduser_request")
+    const { iduser_request,subject, request } = req.body
+    console.log("in addNewUser_Request controller");
+    let date=new Date();
+    date =JSON.stringify(date);
+    const response="";
+    const status="בקשתך נשלחה ?באיפול להוסיף למנהל" ;
     const UsersEmail=req.user.email;
-    console.log(UsersEmail)
+    const iduser=req.user.iduser;
+    console.log("UsersEmail,iduser_request,subject, request, response, date, status, iduser",UsersEmail,iduser_request,subject, request, response, date, status, iduser);
     sendEmailToUser(UsersEmail,iduser_request,subject, request, response, date, status, iduser);
-    console.log("in addNewUser_Request controller after send email❤️❤️❤️")
-    console.log(subject)
+    console.log("in addNewUser_Request controller after send email❤️");
     const user_request = await User_RequestDal.addNewUser_RequestDal({ subject, request, response, date, status, iduser})
     if (user_request) { // Created
         return res.status(201).json({ message: 'New user_request created' })
@@ -56,6 +58,20 @@ addNewUser_Request = async (req, res) => {
     }
 
 }
+getAllUser_RequestsByStatus=async(req,res)=>{
+    const status="בקשתך נשלחה ?באיפול להוסיף למנהל";
+    //const status=req.user.status;
+    console.log(status);
+    const user_requestsByStatus = await User_RequestDal.getAllUser_RequestsByStatusDal(status);
+    console.log(user_requestsByStatus);
+    if (!user_requestsByStatus?.length) {
+        return res.status(400).json({ message: 'No user_requestsByStatus found' })
+    }
+
+    return res.json(user_requestsByStatus);
+
+}
+
 getUser_RequestsByUserId=async(req,res)=>{
     const iduser=req.user.iduser;
     console.log(iduser)
@@ -67,8 +83,12 @@ getUser_RequestsByUserId=async(req,res)=>{
 }
 
 updateUser_RequestById = async (req, res) => {
-    const { iduser_request, subject, request, response, date, status, iduser,email} = req.body
+    const { iduser_request, subject, request, response, iduser,email} = req.body
+   
     // Confirm data
+    const date=new Date();
+    date =JSON.stringify(date);
+    const status="בקשתך טופלה";
     const UsersEmail=email;
     console.log("in updateUser_RequestById controller")
     console.log("email")
@@ -109,7 +129,7 @@ var sendEmailToUser=async(UsersEmail,iduser_request, subject, request, response,
     //var initiatorsEmails=initiatorsArr.map(async(initiator)=> {return await initiatorDal.getInitiatorEmailById(initiator)})
     //var UsersEmail = await User_RequestDal.getUsersEmailByIdDal(iduser)///////dal-user
     
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",UsersEmail)
+    console.log("!!!!!!!!!!!!!!!!!!!!!sendEmailToUser!!!!!!!!!!!!!!!!!!!!",UsersEmail)
    
     sendEmail(UsersEmail,iduser_request, subject, request, response, date, status, iduser);
 

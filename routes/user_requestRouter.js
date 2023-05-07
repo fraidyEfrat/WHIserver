@@ -9,8 +9,11 @@ User_RequestRouter.route("/")
     .get([verifyJWT,verifyJWT_admin],user_requestController.getAllUser_Requests)
     .post(verifyJWT,user_requestController.addNewUser_Request);
 
-User_RequestRouter.route("/iduser/tt")
+User_RequestRouter.route("/ByUserID")//??/iduser/ByUserID
     .get(verifyJWT, user_requestController.getUser_RequestsByUserId)
+
+User_RequestRouter.route("/Status/:status/:sortOrder")
+    .get(user_requestController.getAllUser_RequestsByStatus)
 
 User_RequestRouter.route("/:id")
     .get([verifyJWT,verifyJWT_admin],user_requestController.getUser_RequestsById)

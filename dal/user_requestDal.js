@@ -20,6 +20,12 @@ addNewUser_RequestDal = async (req, res) => {
     console.log(res);
     return res; 
 }
+getAllUser_RequestsByStatusDal=async(status)=>{
+    const res=await User_Request.findAll({where:{status:status}})
+    
+    return res
+}
+
 getUser_RequestsByUserIdDal=async(iduser)=>{
     const res=await User_Request.findAll({where:{iduser:iduser}})
     return res

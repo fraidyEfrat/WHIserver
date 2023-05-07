@@ -21,16 +21,16 @@ var mailOptions = {
 };
 
 var sendEmail=(UsersEmail,iduser_request, subject, request, response, date, status, iduser)=>{
-  console.log("UsersEmail")
+  console.log("sendEmail")
 
   console.log(UsersEmail)
 
   mailOptions.subject=`A new request #${iduser_request} from ${iduser}`
-  mailOptions.text=`${UsersEmail} ${subject}  ${request} ${response} ${date}`;
+  mailOptions.text=`מייל: ${UsersEmail}       נושא: ${subject}       בקשתך:${request}         תאריך: ${date}                 תגובתינו:${response}`;
   mailOptions.to=UsersEmail.toString();
   console.log(UsersEmail)
   console.log(UsersEmail,subject,request,response,date)
-  console.log("vvvvvvvvvvvvvvvvv")
+  console.log("vvvvvvvvsendEmailvvvvvvvvv")
   console.log(UsersEmail,iduser_request, subject, request, response, date, status, iduser)
   transporter.sendMail(mailOptions, function(error, info){
   console.log("UsersEmail.toString()")
