@@ -22,7 +22,8 @@ getAllUser_Requests = async (req, res) => {
 
 
 getUser_RequestsById = async (req, res) => {
-    const iduser_request = req.params.iduser_request;
+    const iduser_request =50; //req.params.iduser_request;
+    const sortOrder="";
     console.log(iduser_request)
     const user_request=await User_RequestDal.getUser_RequestsByIdDal(iduser_request);
     console.log()
@@ -60,7 +61,7 @@ addNewUser_Request = async (req, res) => {
 }
 getAllUser_RequestsByStatus=async(req,res)=>{
     const status="בקשתך נשלחה ?באיפול להוסיף למנהל";
-    //const status=req.user.status;
+     //const status=req.user.status;
     console.log(status);
     const user_requestsByStatus = await User_RequestDal.getAllUser_RequestsByStatusDal(status);
     console.log(user_requestsByStatus);
@@ -72,10 +73,12 @@ getAllUser_RequestsByStatus=async(req,res)=>{
 
 }
 
-getUser_RequestsByUserId=async(req,res)=>{
-    const iduser=req.user.iduser;
+getUser_RequestsByUserIdAndSort=async(req,res)=>{
+    const iduser=50;//req.user.iduser;
+    const sortOrder=req.params.sortOrder;
+    //const sortOrder="asc";//new//?????here to????
     console.log(iduser)
-    const user_requests=await User_RequestDal.getUser_RequestsByUserIdDal(iduser);
+    const user_requests=await User_RequestDal.getUser_RequestsByUserIdAndSortDal(iduser,sortOrder);
     if(!user_requests.length){
         return res.status(400).json({messege:'no user_requests found'})
     }

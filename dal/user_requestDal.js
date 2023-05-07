@@ -26,8 +26,14 @@ getAllUser_RequestsByStatusDal=async(status)=>{
     return res
 }
 
-getUser_RequestsByUserIdDal=async(iduser)=>{
+getUser_RequestsByUserIdAndSortDal=async(iduser,sortOrder)=>{
     const res=await User_Request.findAll({where:{iduser:iduser}})
+    if(sortOrder=="asc"){
+        console.log("1resres");
+        res.sort((a,b) => Date.parse(b.data) - Date.parse(a.date));}
+    else{console.log("2resres");
+        res.sort((a,b) => Date.parse(a.date) -Date.parse(b.data));//; {Date.parse(a.date)>Date.parse(b.data)?console.log(Date.parse(a.date)):console.log(Date.parse(b.date))}
+}
     return res
 }
 getUser_RequestsByIdDal=async(iduser_request)=>{
