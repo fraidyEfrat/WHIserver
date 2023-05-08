@@ -74,7 +74,7 @@ getAllUser_RequestsByStatus=async(req,res)=>{
 }
 
 getUser_RequestsByUserIdAndSort=async(req,res)=>{
-    const iduser=50;//req.user.iduser;
+    const iduser=req.user.iduser;
     const sortOrder=req.params.sortOrder;
     //const sortOrder="asc";//new//?????here to????
     console.log(iduser)

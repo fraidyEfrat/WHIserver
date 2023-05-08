@@ -10,7 +10,7 @@ User_RequestRouter.route("/")
     .post(verifyJWT,user_requestController.addNewUser_Request);
 
 User_RequestRouter.route("/ByUserID/:sortOrder")
-    .get(user_requestController.getUser_RequestsByUserIdAndSort)//verifyJWT, 
+    .get(verifyJWT,user_requestController.getUser_RequestsByUserIdAndSort)//verifyJWT, 
 
 User_RequestRouter.route("/Status/:status/:sortOrder")
     .get(user_requestController.getAllUser_RequestsByStatus)
