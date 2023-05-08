@@ -28,7 +28,7 @@ getAllUser_RequestsByStatusDal=async(status)=>{
 
 getUser_RequestsByUserIdAndSortDal=async(iduser,sortOrder)=>{
     const res=await User_Request.findAll({where:{iduser:iduser}})
-    if(sortOrder=="asc"){
+    if(sortOrder=="desc"){
         console.log("1resres");
         res.sort((a,b) => Date.parse(b.date) - Date.parse(a.date));}
     else{console.log("2resres");
