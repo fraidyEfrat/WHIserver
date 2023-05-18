@@ -21,7 +21,7 @@ addNewArticleDal = async (req, res) => {
 }
 
 updateArticleByIdDal = async (data, id) => {
-    
+    console.log('---------------updateArticleByIdDal-------------');
     const res = await Article.update(data, { where: { idarticle: id } })
     return res
 }

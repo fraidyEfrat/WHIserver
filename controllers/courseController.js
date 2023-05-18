@@ -55,11 +55,12 @@ const updateCourseById = async (req, res) => {
 
 const deleteCourseById = async (req, res) => {
     const  idcourse = req.params.idcourse
-
+console.log("11idcourseidcourseidcourse",idcourse);
     if (!idcourse) {
         return res.status(400).json({ message: 'course ID required' })
     }
     await CourseDal.deleteCourseByIdDal(idcourse);
+    console.log("33idcourseidcourseidcourse",idcourse);
     res.json(`course with ID ${idcourse} deleted`)
 }
 

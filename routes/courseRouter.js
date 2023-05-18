@@ -11,7 +11,7 @@ CourseRouter.route("/")
     .put([verifyJWT,verifyJWT_admin],courseController.updateCourseById);
 
 CourseRouter.route("/:idcourse")
-    .delete([verifyJWT,verifyJWT_admin],courseController.deleteCourseById);
+    .delete(courseController.deleteCourseById);
 
 
 module.exports=CourseRouter;

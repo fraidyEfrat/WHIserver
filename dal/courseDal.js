@@ -22,7 +22,7 @@ updateCourseByIdDal = async (data, id) => {
 }
 
  deleteCourseByIdDal = async (idcourse) => {
-   
+    console.log("idcourseidcourseidcourse",idcourse);
     await Course.destroy({
         where: {
             idcourse: idcourse

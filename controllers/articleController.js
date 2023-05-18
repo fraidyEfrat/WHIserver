@@ -44,8 +44,9 @@ class ArticleController {
     }
 
     updateArticleById = async (req, res) => {
+        console.log('---------------updateArticleById-------------');
         const { idarticle, idsubject, title, content, picture, author, grade } = req.body
-        console.log(idarticle, idsubject, title, content, picture, author, grade);
+        console.log('---------------updateArticleById-------------',idarticle, idsubject, title, content, picture, author, grade);
         if (!idarticle) {
             return res.status(400).json({
                 message: 'All fields are required'
