@@ -2,7 +2,8 @@ const CourseDal=require("../dal/courseDal");
 const Article = require("../models/article");
 
 
-const getAllCourses = async (req, res) => {
+class CourseController {
+getAllCourses = async (req, res) => {
     
     const courses = await CourseDal.getAllCoursesDal({});
     console.log(courses) 
@@ -15,7 +16,7 @@ const getAllCourses = async (req, res) => {
 }
 
 
-const addNewCourse = async (req, res) => {
+addNewCourse = async (req, res) => {
     const {lecturer, maxRegisters, cost, numLecture, idsubject, picture, address, minage, maxage,topic } = req.body
     console.log(req.body);
    
@@ -36,8 +37,21 @@ const addNewCourse = async (req, res) => {
     }
 
 }
+getCourseById = async (req,res)=>{
+    const  idcourse = req.params.idcourse
+    console.log("getCourseById",idcourse);
+    if (!idcourse) {
+        return res.status(400).json({ message: 'course ID required' })
+    }
+    const course =await CourseDal.getCourseByIdDal(idcourse);
+    
+        if (!course) {
+            return res.status(400).json({ message: 'course not found' })
+        }
+        res.json(course)
 
-const updateCourseById = async (req, res) => {
+}
+updateCourseById = async (req, res) => {
     const { idcourse, lecturer, maxRegisters, cost, numLecture, subject, picture, address, minage, maxage,topic } = req.body
     // Confirm data
     
@@ -53,9 +67,9 @@ const updateCourseById = async (req, res) => {
     return res.json(course)
 }
 
-const deleteCourseById = async (req, res) => {
+ deleteCourseById = async (req, res) => {
     const  idcourse = req.params.idcourse
-console.log("11idcourseidcourseidcourse",idcourse);
+    console.log("11idcourseidcourseidcourse",idcourse);
     if (!idcourse) {
         return res.status(400).json({ message: 'course ID required' })
     }
@@ -64,11 +78,7 @@ console.log("11idcourseidcourseidcourse",idcourse);
     res.json(`course with ID ${idcourse} deleted`)
 }
 
+}CourseController
 
-module.exports = {
-    getAllCourses,
-    addNewCourse,
-    updateCourseById,
-    deleteCourseById,
-}
-
+const courseController = new CourseController();
+module.exports = courseController;

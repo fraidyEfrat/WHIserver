@@ -7,11 +7,13 @@ const verifyJWT = require("../middleware/verifyJWT");
 
 CourseRouter.route("/")
     .get(courseController.getAllCourses)
-    .post([verifyJWT,verifyJWT_admin],courseController.addNewCourse)
-    .put([verifyJWT,verifyJWT_admin],courseController.updateCourseById);
+    .post([verifyJWT,verifyJWT_admin],courseController.addNewCourse);
+   
 
 CourseRouter.route("/:idcourse")
-    .delete(courseController.deleteCourseById);
+    .get(courseController.getCourseById)
+    .delete(courseController.deleteCourseById)
+    .put(courseController.updateCourseById);//[verifyJWT,verifyJWT_admin],
 
 
 module.exports=CourseRouter;

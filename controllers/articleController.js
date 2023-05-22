@@ -20,9 +20,6 @@ class ArticleController {
     addNewArticle = async (req, res) => {
         console.log("addNewArticle");
         const { idsubject, title, content, picture, author, grade } = req.body
-
-        console.log("✔✔✔✔")
-
         if (!idsubject) {
             return res.status(400).json({
                 message: 'All fields are required'
@@ -43,7 +40,7 @@ class ArticleController {
 
     }
 
-    updateArticleById = async (req, res) => {
+    updateArticle = async (req, res) => {
         console.log('---------------updateArticleById-------------');
         const { idarticle, idsubject, title, content, picture, author, grade } = req.body
         console.log('---------------updateArticleById-------------',idarticle, idsubject, title, content, picture, author, grade);
@@ -52,7 +49,7 @@ class ArticleController {
                 message: 'All fields are required'
             })
         }
-        const article = await ArticleDal.updateArticleByIdDal({ idsubject, title, content, picture, author, grade }, idarticle)
+        const article = await ArticleDal.updateArticleDal({ idsubject, title, content, picture, author, grade }, idarticle)
         if (!article) {
             return res.status(400).json({ message: 'article not found' })
         }

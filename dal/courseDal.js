@@ -15,6 +15,10 @@ class CourseDataAccessor{
     return res;
 
 }
+getCourseByIdDal= async (idcourse) => {
+     const res=await Course.findOne({where:{idcourse:idcourse}})
+     return res
+}
 
 updateCourseByIdDal = async (data, id) => {
     const res = await Course.update(data, { where: { idcourse: id }})
